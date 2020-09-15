@@ -37,30 +37,20 @@ var commands = [
     'destory the enemy base'
 ]
 
-// 1
+
 //console.log('_____________ STAGE 1 Begin _____________');
-// import read line
-// const readlineSync = require('readline-sync');
 // ask the user
 var rawword = readlineSync.question('Yes master? ');
 //debug
 var start = new Date().getTime();// measure time for whole procedure after user input words
-// import compromise
-// const nlp = require('compromise');
+
 // lower case it ( for comparison later on)
 var nlpword = nlp(rawword).toLowerCase()
 // tokenise it
 var processed = nlpword.terms().out('array')
-// end section
 //console.log('_____________ STAGE 1 Passed _____________');
-//console.log(processed);
+
 //console.log('_____________ STAGE 2 Begin _____________');
-//2
-//import the dictionary file (top 10000)
-//const dictionary = require('fs').readFileSync("google-10000-english.txt", 'utf-8').split('\n') //This is just an array of words
-//const dictionary = require('fs').readFileSync("words_alpha.txt", 'utf-8').split('\r\n') // make an array of the words
-//import natural
-// const natural = require('natural');
 //create a spellcheck object based off our 10000 word dictionary
 var spellcheck = new natural.Spellcheck(dictionary);
 //define the depth
@@ -82,28 +72,22 @@ misspelt.forEach(word => {
 });
 //join together processed words
 rawwordsspeltchecked = processed.join(" ");
-// end section
 //console.log('_____________ STAGE 2 Passed _____________');
-//console.log(rawwordsspeltchecked);
+
 //console.log('_____________ STAGE 3 Begin _____________');
-//3
 //create a new nlp doc object based of our spelt correctly words
 var nlpword = nlp(rawwordsspeltchecked)//.toLowerCase()
 //get the nouns out
 var nlpverbs = [];//nlpword.verbs().out('array')
 //get the verbs out
 var nlpnouns = [];//nlpword.nouns().out('array')
-//get all words (nigga i guess)
+//get all words
 var nlpnouns = nlpword.terms().out('array')
 // create a array with extracted words
 var extractedwords = nlpnouns.concat(nlpverbs);
-// end section
 //console.log('_____________ STAGE 3 Passed _____________');
-//console.log(nlpnouns,nlpverbs,extractedwords);
+
 //console.log('_____________ STAGE 4 Begin _____________');
-//4
-//import the thesaurus
-// const thesaurus = require("thesaurus");
 //define variable for synonym words
 var synonyms = [];
 //loop though the extracted words
@@ -115,14 +99,9 @@ extractedwords.forEach(word => {
 });
 // combine extracted words and synonyms
 extractedwords = extractedwords.concat(synonyms);
-// end section
 //console.log('_____________ STAGE 4 Passed _____________');
-//console.log(synonyms)
-//console.log(extractedwords)
+
 //console.log('_____________ STAGE 5 Begin _____________');
-// 5
-// create tokeniser object
-// const tokenizer = new natural.TreebankWordTokenizer();
 // define extended commands
 var extendedcommands = []
 //loop though the commands
@@ -144,12 +123,9 @@ commands.forEach(command => {
     extendedcommands.push(command);
 });
 // now one of the arrays will be weighted more then the other
-// commands = extendedcommands
-// end section
 //console.log('_____________ STAGE 5 Passed _____________');
 
 //console.log('_____________ STAGE 6 Begin _____________');
-// 6
 //define array for probablilities for each command
 var prob = [];
 //defune threshold (how similar the words need to be to mark as correct);
@@ -185,7 +161,6 @@ for (let index = 0; index < commands.length; index++) {
     var element = extendedcommands[index];
     // define the scale at which the extended commands are worth,
     var scale = 1/(extractedwords.length);
-    //console.log(scale)
     // tonise the extended commands
     var extendedCommandsToken = tokenizer.tokenize(element);
     // now we cycle thought the extended commands to get a more accurate categorisation
@@ -218,6 +193,8 @@ prob.forEach(element => {
     tot = element + tot
 });
 var percentageofmax = (prob[indexofmax] / tot);
+
+// final output
 console.log("i am ", Math.floor(percentageofmax* 100),"% sure that you ment",anwser);
 
 
