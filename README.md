@@ -7,11 +7,12 @@ For now the definition of the commands is done within the file but this can be c
 The output can also be assigned to a variable instead of being outputed to the console.
 The script outputs the highest probablility command based off the input.
 ``` 
-Commands:
+Commands defined in this example:
 ["turn off the lights",
 "create darkness",
 "play some music"]
 
+Code:
 node finalProcessing.js 
 > lights off
 I am  74 % sure that you ment turn off the lights
