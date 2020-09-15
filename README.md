@@ -19,6 +19,8 @@ I am  74 % sure that you ment turn off the lights
 
 ```
 # Installation
-In order to use this file please download the repository as a zip and use the following command to run the script:
+In order to use this file please download the dependencies listed in package.json
+``` npm install package.json ```
+and then run the script with the following command:
 ``` node finalProcessing.js  ```
 The script relies on some local files for the wordlists it uses for the comparison so make sure these are avaiable in the same directory.
