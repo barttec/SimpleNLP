@@ -1,0 +1,8 @@
+{
+    "dependencies": {
+        "natural": "latest",
+        "readline-sync": "latest",
+        "compromise": "latest",
+        "thesaurus": "latest"
+    }
+}
